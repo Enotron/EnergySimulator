@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://simulator.enotron.org/web-service" 
+	targetNamespace="http://simulator.enotron.org/web-service" >
+	
+	<xs:element name="createGridsimRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="callContext" type="tns:callContext"/>
+		        <xs:element name="simulatorType" type="tns:simulatorName"/>
+		        <xs:element name="simulatorName" type="tns:simulatorType"/>
+		        <xs:element name="blockSize" type="tns:blockSize" minOccurs="0"/>
+		        <xs:element name="rateSeconds" type="xs:duration" minOccurs="0"/>
+		        <xs:element name="startAfterCreate" type="xs:boolean" minOccurs="0"/>
+		        <xs:element name="latitude" type="xs:double" minOccurs="0"/>
+		        <xs:element name="longitude" type="xs:double" minOccurs="0"/>
+		        <xs:element name="description" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="createGridsimResponse">
+		<xs:complexType>
+			<xs:sequence>
+		        <xs:element name="simulatorDetails" type="tns:simulatorDetails"/>
+		        <xs:element name="parameterList" type="tns:parameter" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence> 
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createGridsimFault">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="faultText" type="xs:normalizedString" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getDataRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="simulatorid" type="xs:hexBinary" />
+				<xs:element maxOccurs="unbounded" minOccurs="0"
+							name="parameterList" type="xs:token" />
+				<xs:element name="valuesMode" type="tns:valuesMode" />
+				<xs:element name="startTime" type="xs:dateTime" minOccurs="0"/>
+				<xs:element name="endTime" type="xs:dateTime" minOccurs="0"/>
+				<xs:element name="groupBy" type="tns:timeScope" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getDataResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" name="Measurement"
+					type="tns:measurement" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getDataFault">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="faultText" type="xs:normalizedString" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="startGridsimRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="callContext" type="tns:callContext"/>
+				<xs:element name="simulatorid" type="xs:hexBinary" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="startGridsimResponse">
+		<xs:complexType>
+			<xs:sequence>
+		        <xs:element name="simulatorUid" type="xs:hexBinary"/>
+		        <xs:element name="runDetails" type="tns:simulatorRun"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="startGridsimFault">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="faultText" type="xs:normalizedString" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="stopGridsimRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="callContext" type="tns:callContext"/>
+				<xs:element name="simulatorid" type="xs:hexBinary" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="stopGridsimResponse">
+		<xs:complexType>
+			<xs:sequence>
+		        <xs:element name="simulatorUid" type="xs:hexBinary"/>
+		        <xs:element name="runDetails" type="tns:simulatorRun"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="stopGridsimFault">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="faultText" type="xs:normalizedString" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="deleteGridsimRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="callContext" type="tns:callContext"/>
+				<xs:element name="simulatorid" type="xs:hexBinary" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="deleteGridsimResponse">
+		<xs:complexType>
+			<xs:sequence>
+		        <xs:element name="simulatorDetails" type="tns:simulatorDetails"/>
+		        <xs:element name="runDetails" type="tns:simulatorRun"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteGridsimFault">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="faultText" type="xs:normalizedString" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="listGridsimsRequest">
+		<xs:annotation>
+			<xs:documentation>List all of your Simulator instances</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="listGridsimsResponse">
+		<xs:complexType>
+			<xs:sequence>
+		        <xs:element name="simulatorDetails" type="tns:simulatorDetailsAndRun" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="metadataRequest">
+		<xs:annotation>
+			<xs:documentation>List all of the types of Simulator type that this module supports, and their parameters</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="metadataResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="description" type="xs:string"/>
+				<xs:element name="version" type="xs:token"/>
+				<xs:element name="buildDate" type="xs:date"/>
+				<xs:element name="startDate" type="xs:dateTime"/>
+		        <xs:element name="simulatorMetadata" type="tns:simulatorMetadata" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:complexType name="callContext">
+		<xs:sequence>
+			<xs:element name="callingApplication" type="xs:token"/>
+			<xs:element name="userName" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+		<xs:complexType name="simulatorDetails">
+		<xs:sequence>
+	        <xs:element name="simulatorType" type="tns:simulatorName"/>
+			<xs:element name="simulatorName" type="tns:simulatorType" />
+	        <xs:element name="simulatorUid" type="xs:hexBinary"/>
+	        <xs:element name="latitude" type="xs:double" minOccurs="0"/>
+	        <xs:element name="longitude" type="xs:double" minOccurs="0"/>
+	        <xs:element name="description" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="simulatorRun">
+		<xs:sequence>
+	        <xs:element name="runnning" type="xs:boolean"/>
+	        <xs:element name="startTime" type="xs:dateTime"/>
+	        <xs:element name="runTime" type="xs:duration"/>
+	        <xs:element name="stopTime" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="simulatorDetailsAndRun">
+		<xs:sequence>
+	        <xs:element name="simulatorDetails" type="tns:simulatorDetails"/>
+			<xs:element name="simulatorRun" type="tns:simulatorRun" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="simulatorMetadata">
+		<xs:sequence>
+	        <xs:element name="simulatorType" type="tns:simulatorType"/>
+	        <xs:element name="simulatorClass" type="xs:token"/>
+			<xs:element name="parameterList" type="tns:parameter" minOccurs="0" maxOccurs="unbounded"/>	        
+		</xs:sequence>
+	</xs:complexType>
+	 
+	<xs:complexType name="measurement">
+		<xs:sequence>
+			<xs:element name="durationSecs" type="xs:int" />
+			<xs:element name="name" type="xs:token" />
+			<xs:element minOccurs="0" name="timestamp" type="xs:dateTime" />
+			<xs:element name="unit" type="xs:token" />
+			<xs:element name="valueCode" type="tns:valuesMode" />
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="values"
+				nillable="true" type="xs:float" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="valuesMode">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SINGLE" />
+			<xs:enumeration value="SAMPLES" />
+			<xs:enumeration value="AVERAGE" />
+			<xs:enumeration value="MIN_MEAN_MAX_STDDEV" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="timeScope">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MINUTE" />		
+			<xs:enumeration value="TENMINUTE" />		
+			<xs:enumeration value="THIRTYMINUTE" />		
+			<xs:enumeration value="HOUR" />		
+			<xs:enumeration value="HALFDAY" />		
+			<xs:enumeration value="DAY" />		
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="simulatorType">
+		<xs:restriction base="xs:token">
+			<xs:minLength value="4"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="simulatorName">
+		<xs:restriction base="xs:token">
+			<xs:minLength value="3"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="blockSize">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="2"/>
+			<xs:maxInclusive value="10000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="parameter">
+		<xs:sequence>
+			<xs:element name="parameterName" type="xs:token" />
+			<xs:element name="parameterUnit" type="xs:token" />
+		</xs:sequence>
+	</xs:complexType>
+	
+</xs:schema>
