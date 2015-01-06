@@ -1,7 +1,8 @@
 bin/
 target/
 .settings/
-
+src/main/java/org/enotron/simulator/web_service
+.classpath
 
 *.class
 # Package Files #
