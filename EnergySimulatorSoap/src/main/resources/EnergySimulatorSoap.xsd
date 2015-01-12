@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+<xs:schema 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    jaxb:version="2.1" 
 	xmlns:tns="http://simulator.enotron.org/web-service" 
 	targetNamespace="http://simulator.enotron.org/web-service" >
 	<xs:annotation>
@@ -28,6 +31,7 @@
 		</xs:complexType>
 	</xs:element>
 
+
 	<xs:element name="createGridsimResponse">
 		<xs:complexType>
 			<xs:sequence>
@@ -37,11 +41,16 @@
 		</xs:complexType>
 	</xs:element>
 	
+	
 	<xs:element name="createGridsimFault">
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="faultText" type="xs:normalizedString" />
-			</xs:sequence>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractFault">
+					<xs:sequence>
+						<xs:element name="faultText" type="xs:normalizedString" />
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
 	
@@ -70,9 +79,13 @@
 
 	<xs:element name="getDataFault">
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="faultText" type="xs:normalizedString" />
-			</xs:sequence>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractFault">
+					<xs:sequence>
+						<xs:element name="faultText" type="xs:normalizedString" />
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
 	
@@ -96,9 +109,13 @@
 	
 	<xs:element name="startGridsimFault">
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="faultText" type="xs:normalizedString" />
-			</xs:sequence>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractFault">
+					<xs:sequence>
+						<xs:element name="faultText" type="xs:normalizedString" />
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
 
@@ -122,9 +139,13 @@
 	
 	<xs:element name="stopGridsimFault">
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="faultText" type="xs:normalizedString" />
-			</xs:sequence>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractFault">
+					<xs:sequence>
+						<xs:element name="faultText" type="xs:normalizedString" />
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
 
@@ -149,9 +170,13 @@
 	
 	<xs:element name="deleteGridsimFault">
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="faultText" type="xs:normalizedString" />
-			</xs:sequence>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractFault">
+					<xs:sequence>
+						<xs:element name="faultText" type="xs:normalizedString" />
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
 
@@ -290,5 +315,14 @@
 			<xs:element name="parameterUnit" type="xs:token" />
 		</xs:sequence>
 	</xs:complexType>
+	
+	<xs:complexType name="AbstractFault" abstract="true">
+		<xs:annotation>
+			<xs:appinfo>
+				<jaxb:class name="AbstractFault" implClass="org.enotron.simulator.exception.AbstractSimulatorFault"/>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:complexType>
+	
 	
 </xs:schema>

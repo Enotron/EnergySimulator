@@ -1,0 +1,94 @@
+<jaxb:bindings version="1.0" 
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector"
+	xmlns:annox="http://annox.dev.java.net"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+    jaxb:extensionBindingPrefixes="ci annox xjc">
+	<jaxb:bindings schemaLocation="EnergySimulatorSoap.xsd" node="/xs:schema">
+
+		<jaxb:bindings node="/xs:schema/xs:element[@name='createGridsimFault']/xs:complexType">
+             <annox:annotate>@org.springframework.ws.soap.server.endpoint.annotation.SoapFault(faultCode=org.springframework.ws.soap.server.endpoint.annotation.FaultCode.CLIENT)</annox:annotate>
+			 <ci:code>
+	public CreateGridsimFault() { super();}
+			        
+	public CreateGridsimFault(String message) { super(message);}
+
+	public CreateGridsimFault(String message, Throwable t) { super(message, t);}
+	
+	private static final long serialVersionUID = 1L;</ci:code>
+		</jaxb:bindings>
+		
+		<jaxb:bindings node="/xs:schema/xs:element[@name='startGridsimFault']/xs:complexType">
+             <annox:annotate>@org.springframework.ws.soap.server.endpoint.annotation.SoapFault(faultCode=org.springframework.ws.soap.server.endpoint.annotation.FaultCode.CLIENT)</annox:annotate>
+			 <ci:code>
+	public StartGridsimFault() { super();}
+			        
+	public StartGridsimFault(String message) { super(message);}
+
+	public StartGridsimFault(String message, Throwable t) { super(message, t);}
+	
+	private static final long serialVersionUID = 1L;</ci:code>
+		</jaxb:bindings>
+
+
+		<jaxb:bindings node="/xs:schema/xs:element[@name='stopGridsimFault']/xs:complexType">
+             <annox:annotate>@org.springframework.ws.soap.server.endpoint.annotation.SoapFault(faultCode=org.springframework.ws.soap.server.endpoint.annotation.FaultCode.CLIENT)</annox:annotate>
+			 <ci:code>
+	public StopGridsimFault() { super();}
+			        
+	public StopGridsimFault(String message) { super(message);}
+
+	public StopGridsimFault(String message, Throwable t) { super(message, t);}
+	
+	private static final long serialVersionUID = 1L;</ci:code>
+		</jaxb:bindings>
+		
+		
+		<jaxb:bindings node="/xs:schema/xs:element[@name='deleteGridsimFault']/xs:complexType">
+             <annox:annotate>@org.springframework.ws.soap.server.endpoint.annotation.SoapFault(faultCode=org.springframework.ws.soap.server.endpoint.annotation.FaultCode.CLIENT)</annox:annotate>
+			 <ci:code>
+	public DeleteGridsimFault() { super();}
+			        
+	public DeleteGridsimFault(String message) { super(message);}
+
+	public DeleteGridsimFault(String message, Throwable t) { super(message, t);}
+	
+	private static final long serialVersionUID = 1L;</ci:code>
+		</jaxb:bindings>
+	
+	
+		<jaxb:bindings node="/xs:schema/xs:element[@name='getDataFault']/xs:complexType">
+             <annox:annotate>@org.springframework.ws.soap.server.endpoint.annotation.SoapFault(faultCode=org.springframework.ws.soap.server.endpoint.annotation.FaultCode.CLIENT)</annox:annotate>
+			 <ci:code>
+	public GetDataFault() { super();}
+			        
+	public GetDataFault(String message) { super(message);}
+
+	public GetDataFault(String message, Throwable t) { super(message, t);}
+	
+	private static final long serialVersionUID = 1L;</ci:code>
+		</jaxb:bindings>
+		
+		<jaxb:bindings node="/xs:schema/xs:complexType[@name='simulatorDetails']/xs:sequence/xs:element[@name='simulatorUid']">
+             <annox:annotate>@com.fasterxml.jackson.databind.annotation.JsonSerialize(using=org.enotron.simulator.utility.JsonByteArrayToHexString.class)</annox:annotate>
+		</jaxb:bindings>
+		
+		<jaxb:bindings node="/xs:schema/xs:element[@name='stopGridsimRequest']/xs:complexType/xs:sequence/xs:element[@name='simulatorid']">
+             <annox:annotate>@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using=org.enotron.simulator.utility.JsonHexStringToByteArray.class)</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="/xs:schema/xs:element[@name='startGridsimRequest']/xs:complexType/xs:sequence/xs:element[@name='simulatorid']">
+             <annox:annotate>@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using=org.enotron.simulator.utility.JsonHexStringToByteArray.class)</annox:annotate>
+		</jaxb:bindings>
+		
+		<jaxb:bindings node="/xs:schema/xs:element[@name='deleteGridsimRequest']/xs:complexType/xs:sequence/xs:element[@name='simulatorid']">
+             <annox:annotate>@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using=org.enotron.simulator.utility.JsonHexStringToByteArray.class)</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="/xs:schema/xs:element[@name='getDataRequest']/xs:complexType/xs:sequence/xs:element[@name='simulatorid']">
+             <annox:annotate>@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using=org.enotron.simulator.utility.JsonHexStringToByteArray.class)</annox:annotate>
+		</jaxb:bindings>
+
+	</jaxb:bindings>
+</jaxb:bindings> 
