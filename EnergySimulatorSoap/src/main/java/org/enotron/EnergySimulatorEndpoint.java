@@ -110,7 +110,9 @@ public class EnergySimulatorEndpoint {
 					throws GetDataFault {
 		
 		if (getDataPayload.getValuesMode() == null) {
-			throw new GetDataFault("Invalid value for 'ValuesMode' use one of enumerated values");
+			GetDataFault df = new GetDataFault();
+			df.setFaultText("Invalid value for 'ValuesMode' use one of enumerated values");
+			throw df;
 		}
 		
 		GetDataResponse resp = new GetDataResponse();
@@ -155,11 +157,15 @@ public class EnergySimulatorEndpoint {
 			return resp;
 		} catch (SimulatorException e) {
 			e.printStackTrace();
-			throw new GetDataFault(e.getMessage(), e);
+			GetDataFault gdf = new GetDataFault();
+			gdf.setFaultText(e.getMessage());
+			throw gdf;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new GetDataFault(
-					"Exception from getData " + e.getMessage(), e);
+			GetDataFault gdf = new GetDataFault();
+			gdf.setFaultText("Exception from getData " + 
+					e.getMessage());
+			throw gdf;
 		}
 		
 	}

@@ -12,7 +12,7 @@
 	<artifactId>energy-simulator-soap</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Energy Simulator SOAP Web Service</name>
-	  <description>Energy Simulator SOAP Web Service Project from Enotron
+	<description>Energy Simulator SOAP Web Service Project from Enotron
 Copyright 2015 Enotron Ltd.
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ limitations under the License.</description>
 		<dependency>
 			<groupId>wsdl4j</groupId>
 			<artifactId>wsdl4j</artifactId>
-		    </dependency>
+		</dependency>
 		<dependency>
 			<groupId>org.enotron</groupId>
 			<artifactId>energy-simulator-api</artifactId>
@@ -48,6 +48,11 @@ limitations under the License.</description>
 			<artifactId>energy-simulator-base</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.jvnet.jaxb2_commons</groupId>
+			<artifactId>jaxb2-basics-runtime</artifactId>
+			<version>0.9.2</version>
+		</dependency>
 	</dependencies>
 
 	<properties>
@@ -55,7 +60,7 @@ limitations under the License.</description>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<start-class>org.enotron.Application</start-class>
 	</properties>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -63,22 +68,53 @@ limitations under the License.</description>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jaxb2-maven-plugin</artifactId>
-				<version>1.6</version>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>0.12.3</version>
 				<executions>
 					<execution>
-						<id>xjc</id>
 						<goals>
-							<goal>xjc</goal>
+							<goal>generate</goal>
 						</goals>
 					</execution>
 				</executions>
 				<configuration>
-					<schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
-					<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
-					<clearOutputDir>false</clearOutputDir>
+					<extension>true</extension>
+					<generateDirectory>${project.basedir}/src/main/jaxb</generateDirectory>
+					<args>
+						<arg>-Xannotate</arg>
+						<arg>-Xinject-code</arg>
+					</args>
+					<plugins>
+						<plugin>
+							<groupId>org.jvnet.jaxb2_commons</groupId>
+							<artifactId>jaxb2-basics</artifactId>
+							<version>0.9.2</version>
+						</plugin>
+						<plugin>
+							<groupId>org.jvnet.jaxb2_commons</groupId>
+							<artifactId>jaxb2-basics-annotate</artifactId>
+							<version>1.0.1</version>
+						</plugin>
+						<plugin>
+							<groupId>org.jvnet.jaxb2_commons</groupId>
+							<artifactId>jaxb2-annotate-plugin-test-annox-annotations</artifactId>
+							<version>1.0.0</version>
+						</plugin>
+						<plugin>
+							<groupId>org.jvnet.jaxb2_commons</groupId>
+							<artifactId>jaxb2-value-constructor</artifactId>
+							<version>3.0</version>
+						</plugin>
+					</plugins>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-ws</artifactId>
+						<version>1.1.7.RELEASE</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
